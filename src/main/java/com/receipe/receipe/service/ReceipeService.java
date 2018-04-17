@@ -9,6 +9,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.receipe.receipe.domain.Incredient;
 import com.receipe.receipe.domain.Receipe;
 import com.receipe.receipe.domain.ReceipeDropDownValue;
 import com.receipe.receipe.domain.ReceipeModel;
@@ -29,30 +30,32 @@ public class ReceipeService {
 	@Autowired
 	ReceipeMapper receipeMapper;
 	
-	
-	public ReceipeModel save(ReceipeModel receipe) {
-		Receipe entity = receipeMapper.destinationToSource(receipe);
-		entity = receipeRepository.saveAndFlush(entity);
-		return receipeMapper.sourceToDestination(entity);
+	public Receipe save(Receipe receipe) {
+		List<Incredient> incredients = receipe.getIncredients().stream()
+        		.map(x->{
+					x.setReceipe(receipe);
+					return x;
+		}).collect(Collectors.toList());
+		receipe.setIncredients(incredients);
+		return receipeRepository.saveAndFlush(receipe);
 	}
  
-
-	public ReceipeModel find(Long id) {
+	public Receipe find(Long id) {
 		Optional<Receipe> receipe = receipeRepository.findById(id);
 		if(receipe.isPresent())
-			return receipeMapper.sourceToDestination(receipe.get());
+			return receipe.get();
 		else
 			return null;
 	}
-	 
-	public List<ReceipeModel> findAll() {
+	
+	public List<Receipe> findAll() {
 		List<Receipe> receipes = receipeRepository.findAll();
 		if(!Objects.isNull(receipes) && !CollectionUtils.isEmpty(receipes))
-			return receipes.stream().map(receipeMapper::sourceToDestination).collect(Collectors.toList());
+			return receipes;
 		else
 			return null;
-	}
-	 
+	} 
+	
 	public List<ReceipeDropDownValue> findAllForDropDown() {
 		List<Receipe> receipes = receipeRepository.findAll();
 		if(!Objects.isNull(receipes) && !CollectionUtils.isEmpty(receipes))
