@@ -1,0 +1,14 @@
+<h3>Recipe Manager</h3>
+<div *ngIf="recipe">
+  <label>Recipe name:
+  </label>
+  {{recipe.name}}  
+</div>
+<div *ngIf="!recipe">
+  WELCOME TO RECIPE MANAGER !
+</div>
+<ul class="recipe" *ngIf="recipe">
+  <li *ngFor="let ingredient of recipe.incredients index as i">
+     <label>Ingredient {{i+1}}</label> {{ingredient.name}}
+  </li>
+</ul>

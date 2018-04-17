@@ -1,0 +1,21 @@
+<h1>Recipe Manager</h1>
+<hr>
+<div class="Container">
+  <div class="navbar">
+      <select #recipeDropdown [(ngModel)] = "recipeselected" (ngModelChange)="selectedRecipe($event)">
+          <option *ngFor="let recipe of recipeList" [ngValue]="recipe.id">
+            {{recipe.name}}
+          </option>
+      </select>
+      <button *ngIf="!showAddRecipe" class="addBtn" (click)="add();">
+        add
+      </button>
+  </div>
+    
+    <div class="mainPage">
+        <app-heroes *ngIf="showHeroes" [recipeSelected]="recipeSelected" ></app-heroes>
+        <app-config *ngIf="showAddRecipe" (showAddRecipe)="showRecipe($event)"></app-config>
+    </div>
+    
+</div>
+
