@@ -8,6 +8,21 @@ public class ReceipeModel {
 	private String name ;
 	List<IncredientModel> incredients;
 	
+	
+	public ReceipeModel(){
+		
+	}
+	
+	public ReceipeModel(String name){
+		this.name = name;	
+	}
+	
+	public ReceipeModel(Long id, String name, List<IncredientModel> incredients){
+		this.name = name;	
+		this.incredients = incredients;
+		this.id = id;
+	}
+	
 	public Long getId() {
 		return id;
 	}

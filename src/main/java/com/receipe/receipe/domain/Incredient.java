@@ -37,6 +37,19 @@ public class Incredient {
 	@JoinColumn(name = "receipe_id")
 	private Receipe receipe;
 	
+	public Incredient (){
+		
+	}
+
+	public Incredient (String name){
+		this.name = name;
+	}
+	
+	public Incredient(Receipe receipe, String name){
+		this.name = name;
+		this.receipe = receipe;
+	}
+	
 	public Long getId() {
 		return id;
 	}

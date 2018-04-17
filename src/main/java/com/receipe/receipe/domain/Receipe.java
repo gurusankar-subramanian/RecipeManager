@@ -39,6 +39,22 @@ public class Receipe {
 	@OneToMany(mappedBy = "receipe", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
 	List<Incredient> incredients;
 
+	public Receipe(){
+		
+	}
+	
+	public Receipe(Long id){
+		this.id = id ;
+	}
+	
+
+	public Receipe(Long id, String name, List<Incredient> incredients){
+		this.id = id ;
+		this.name = name ;
+		this.incredients = incredients ;
+	}
+	
+	
 	public Long getId() {
 		return id;
 	}

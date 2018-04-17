@@ -10,6 +10,14 @@ public class IncredientModel {
 	private Long id ;
 	private String name ;
 	
+	public IncredientModel(){
+		
+	}
+	
+	public IncredientModel(String name){
+		this.name = name;
+	}
+	
 	public Long getId() {
 		return id;
 	}
